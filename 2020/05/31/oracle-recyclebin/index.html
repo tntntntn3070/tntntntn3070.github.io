@@ -10,7 +10,7 @@
   
   <title>
     
-      Hello World | Home
+      Oracle - Recycle Bin | Home
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -116,8 +116,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Hello World</h2>
-  <p class="post-date">2020-05-24</p>
+  <h2>Oracle - Recycle Bin</h2>
+  <p class="post-date">2020-05-31</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -125,21 +125,29 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+    <section class="markdown-content"><p>Retrieving a Dropped Table.</p>
+<h2 id="Oracle-Drop-Table-복구-방법"><a href="#Oracle-Drop-Table-복구-방법" class="headerlink" title="[Oracle] Drop Table 복구 방법"></a>[Oracle] Drop Table 복구 방법</h2><h3 id="Recycle-Bin"><a href="#Recycle-Bin" class="headerlink" title="Recycle Bin"></a>Recycle Bin</h3><p>테이블이 삭제되면 완전히 삭제되지 않고 테이블의 이름을 변경 후 테이블스페이스 내의 Recycle Bin 영역에 이동 (<strong>Oracle 10g 이상 지원</strong>)</p>
+<blockquote>
+<p>FLASHBACK TABLE - Recycle Bin 으로 옮겨가는 테이블<br>FLASHBACK TABLE 이름 규칙 - BIN\$unique_id\$version</p>
+</blockquote>
+<p>Session 레벨에서 Recycle Bin 활성화 여부 설정 (<strong>기본 : Enabled</strong>)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">session</span> <span class="keyword">set</span> recyclebin = <span class="keyword">off</span>;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">session</span> <span class="keyword">set</span> recyclebin = <span class="keyword">on</span>;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>Recycle Bin 조회 방법</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> OBJECT_NAME, ORIGINAL_NAME, <span class="keyword">TYPE</span>, CREATETIME</span><br><span class="line"> <span class="keyword">FROM</span> RECYCLEBIN</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> CREATETIME;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- DROP TABLE 시, PURGE 키워드를 사용하면 TABLE 영구 삭제 됨</span></span><br><span class="line"><span class="comment">-- RECYCLEBIN 데이터 삭제 : PURGE RECYCLEBIN;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-</section>
+<h3 id="Recycle-Bin-TABLE-복구"><a href="#Recycle-Bin-TABLE-복구" class="headerlink" title="Recycle Bin TABLE 복구"></a>Recycle Bin TABLE 복구</h3><p>Recycle Bin 에서 복구하려는 FLASHBACK TABLE 의 이름 (OBJECT_NAME) 확인 후 쿼리 실행</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FLASHBACK TABLE "BIN$ODRiHPAfTryWOxbaVjvPOA==$0" TO BEFORE <span class="keyword">DROP</span></span><br><span class="line"><span class="keyword">RENAME</span> <span class="keyword">TO</span> TB_TEMP;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Oracle" >
+    <span class="tag-code">Oracle</span>
+  </a>
+
+      </div>
     
     <!-- Tags END -->
     <!-- NAV START -->
@@ -158,12 +166,21 @@
   <!-- Article END -->
   <!-- Catalog START -->
   
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Oracle-Drop-Table-복구-방법"><span class="toc-nav-text">[Oracle] Drop Table 복구 방법</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Recycle-Bin"><span class="toc-nav-text">Recycle Bin</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Recycle-Bin-TABLE-복구"><span class="toc-nav-text">Recycle Bin TABLE 복구</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
   <!-- Catalog END -->
 </main>
 
 <script>
   (function () {
-    var url = 'https://tntntntn3070.github.io/2020/05/24/hello-world/';
+    var url = 'https://tntntntn3070.github.io/2020/05/31/oracle-recyclebin/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({

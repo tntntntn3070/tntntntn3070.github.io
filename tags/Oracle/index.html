@@ -67,7 +67,7 @@
       
         <li class="list-item">
           
-            <a href="/" class="item-link active">Home</a>
+            <a href="/" class="item-link">Home</a>
           
         </li>
       
@@ -94,7 +94,7 @@
         
           <li class="menu-item">
             
-              <a href="/" class="menu-link mobile-active">Home</a>
+              <a href="/" class="menu-link">Home</a>
             
           </li>
         
@@ -115,34 +115,38 @@
   </div>
 </header>
 
-    <main class="app-body">
+    <div id="article-banner">
+  <h2>Archives</h2>
+  <!--<p class="post-date">文章归档</p>-->
+</div>
+<main class="app-body" id="archives">
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2020/05/31/oracle-recyclebin/">Oracle - Recycle Bin</a>
-      </h2>
-      <p class="article-date">May 31, 2020</p>
-      
-        
-  <a href="/tags#Oracle" >
-    <span class="tag-code">Oracle</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          Retrieving a Dropped Table.
-[Oracle] Drop Table 복구 방법Recycle Bin테이블이 삭제되면 완전히 삭제되지 않고 테이블의 이름을 변경 후 테이블스페이스 내의 Recycle Bin 영역에 이동 (Oracle 10g 이상 지 ...
-        
+  
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2020
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/2020/05/31/oracle-recyclebin/" class="archive-title">Oracle - Recycle Bin</a>
+        <p class="archive-date">05-31</p>
       </div>
-      <a class="more" href="/2020/05/31/oracle-recyclebin/">Read more</a>
-    </article>
-  
-
+    
+  </div>
+</section>
   
 </main>
 
-
+<script>
+  (function () {
+    var url = 'https://tntntntn3070.github.io/tags/Oracle/index.html';
+    $('#article-banner').geopattern(url);
+    $('.header').removeClass('fixed-header');
+  })();
+</script>
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
