@@ -10,7 +10,7 @@
   
   <title>
     
-      Algorithm - Phone Book | Home
+      Algorithm - 다리를 지나는 트럭 | Home
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -116,8 +116,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Algorithm - Phone Book</h2>
-  <p class="post-date">2020-07-17</p>
+  <h2>Algorithm - 다리를 지나는 트럭</h2>
+  <p class="post-date">2020-07-18</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -125,9 +125,9 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h3 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h3><p><a href="https://programmers.co.kr/learn/courses/30/lessons/42577" target="_blank" rel="noopener">Phone Book (Programmers)</a></p>
-<h3 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h3><p>유형 : 문제 범주 Hash.. 에 속아서.. 머리 싸매다.. startsWith 로..</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hash2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">solution</span><span class="params">(String[] phone_book)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> answer = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        String a, b;</span><br><span class="line">        Arrays.sort(phone_book);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;phone_book.length; i++)&#123;</span><br><span class="line">            a = phone_book[i];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;phone_book.length; j++)&#123;</span><br><span class="line">                b = phone_book[j];</span><br><span class="line">                <span class="keyword">if</span>(b.startsWith(a))&#123;</span><br><span class="line">                    answer= <span class="keyword">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> answer;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h3 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h3><p><a href="https://programmers.co.kr/learn/courses/30/lessons/42583" target="_blank" rel="noopener">Phone Book (Programmers)</a></p>
+<h3 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h3><p>유형 : Queue</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.Queue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StackQueue1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">solution</span><span class="params">(<span class="keyword">int</span> bridge_length, <span class="keyword">int</span> weight, <span class="keyword">int</span>[] truck_weights)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> answer = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        Queue&lt;<span class="keyword">int</span>[]&gt; bridge = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span>[] truck = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> currMaxWeight = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> currWeight = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> currTruck = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line"></span><br><span class="line">            truck = bridge.peek();</span><br><span class="line">            <span class="keyword">if</span>(truck == <span class="keyword">null</span> &amp;&amp; currTruck == truck_weights.length) <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//1) 트럭 건너기</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span>[] temp : bridge)&#123;</span><br><span class="line">                temp[<span class="number">1</span>] += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(truck != <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="comment">//2) 트럭 완주 확인 (max weight 제거)</span></span><br><span class="line">                <span class="keyword">if</span>(truck[<span class="number">1</span>] == bridge_length+<span class="number">1</span>)&#123;</span><br><span class="line">                    truck = bridge.poll();</span><br><span class="line">                    currMaxWeight -= truck[<span class="number">0</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//3) 다음 트럭 확인 offer or not</span></span><br><span class="line">            <span class="keyword">if</span>(currTruck &lt; truck_weights.length)&#123;</span><br><span class="line">                currWeight = truck_weights[currTruck];</span><br><span class="line">                <span class="keyword">if</span>(currMaxWeight + currWeight &lt;= weight)&#123;</span><br><span class="line">                    truck = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">                    truck[<span class="number">0</span>] = currWeight;</span><br><span class="line">                    truck[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">                    bridge.offer(truck);</span><br><span class="line">                    currMaxWeight += currWeight;</span><br><span class="line">                    currTruck++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            answer ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> answer;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -145,17 +145,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2020/05/31/oracle-recyclebin/">
+      <a class="nav-left" href="/2020/07/17/algorithm-PhoneBook/">
         <span class="nav-arrow">← </span>
         
-          Oracle - Recycle Bin
+          Algorithm - Phone Book
         
       </a>
     
     
-      <a class="nav-right" href="/2020/07/18/algorithm-Truck/">
+      <a class="nav-right" href="/2020/07/18/algorithm-Scoville/">
         
-          Algorithm - 다리를 지나는 트럭
+          Algorithm - 더 맵게
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -190,7 +190,7 @@
 
 <script>
   (function () {
-    var url = 'https://tntntntn3070.github.io/2020/07/17/algorithm-PhoneBook/';
+    var url = 'https://tntntntn3070.github.io/2020/07/18/algorithm-Truck/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({

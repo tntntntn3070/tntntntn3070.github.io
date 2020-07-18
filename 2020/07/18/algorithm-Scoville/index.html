@@ -10,7 +10,7 @@
   
   <title>
     
-      Algorithm - Phone Book | Home
+      Algorithm - 더 맵게 | Home
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -116,8 +116,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Algorithm - Phone Book</h2>
-  <p class="post-date">2020-07-17</p>
+  <h2>Algorithm - 더 맵게</h2>
+  <p class="post-date">2020-07-18</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -125,9 +125,9 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h3 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h3><p><a href="https://programmers.co.kr/learn/courses/30/lessons/42577" target="_blank" rel="noopener">Phone Book (Programmers)</a></p>
-<h3 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h3><p>유형 : 문제 범주 Hash.. 에 속아서.. 머리 싸매다.. startsWith 로..</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hash2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">solution</span><span class="params">(String[] phone_book)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> answer = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        String a, b;</span><br><span class="line">        Arrays.sort(phone_book);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;phone_book.length; i++)&#123;</span><br><span class="line">            a = phone_book[i];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;phone_book.length; j++)&#123;</span><br><span class="line">                b = phone_book[j];</span><br><span class="line">                <span class="keyword">if</span>(b.startsWith(a))&#123;</span><br><span class="line">                    answer= <span class="keyword">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> answer;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h3 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h3><p><a href="https://programmers.co.kr/learn/courses/30/lessons/42626" target="_blank" rel="noopener">Phone Book (Programmers)</a></p>
+<h3 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h3><p>유형 : PriorityQueue / Heap</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.PriorityQueue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Heap1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">solution</span><span class="params">(<span class="keyword">int</span>[] scoville, <span class="keyword">int</span> K)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> answer = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        PriorityQueue&lt;Integer&gt; queue = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> temp : scoville)&#123;</span><br><span class="line">            queue.add(temp);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> food1, food2;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(queue.peek() &gt;= K) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span>(queue.size() == <span class="number">1</span> &amp;&amp; queue.peek() &lt; K) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            food1 = queue.poll();</span><br><span class="line">            food2 = queue.poll();</span><br><span class="line">            queue.add(food1+food2*<span class="number">2</span>);</span><br><span class="line">            answer ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> answer;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -145,20 +145,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2020/05/31/oracle-recyclebin/">
+      <a class="nav-left" href="/2020/07/18/algorithm-Truck/">
         <span class="nav-arrow">← </span>
-        
-          Oracle - Recycle Bin
-        
-      </a>
-    
-    
-      <a class="nav-right" href="/2020/07/18/algorithm-Truck/">
         
           Algorithm - 다리를 지나는 트럭
         
-        <span class="nav-arrow"> →</span>
       </a>
+    
     
   </div>
 
@@ -190,7 +183,7 @@
 
 <script>
   (function () {
-    var url = 'https://tntntntn3070.github.io/2020/07/17/algorithm-PhoneBook/';
+    var url = 'https://tntntntn3070.github.io/2020/07/18/algorithm-Scoville/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
